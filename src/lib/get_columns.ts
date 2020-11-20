@@ -36,10 +36,28 @@ function parse_range(range: string): number[] {
     }
     else {
         const nums: string[] = range.split(",");
-        nums.forEach((n) => {
-            result.push(parseInt(n, 10));
+        nums.forEach((n: string) => {
+            const m = n.match(/([0-9]+)-([0-9]+)/);
+            if (m != null) {
+                const r = seq(parseInt(m[1], 10), parseInt(m[2], 10));
+                r.forEach((r0) => {
+                    result.push(r0);
+                });
+            }
+            else {
+                result.push(parseInt(n, 10));
+            }
         });
     }
 
+    return result;
+}
+
+
+function seq(start: number, end: number): number[] {
+    const result = [];
+    for (let i = start; i < end; i++) {
+        result.push(i);
+    }
     return result;
 }
