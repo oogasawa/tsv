@@ -34,7 +34,10 @@ function parse_range(range: string): number[] {
     if (range === undefined || range === null) {
         result.push(0);
     }
-    else {
+    else if (typeof range === "number") {
+        result.push(range);
+    }
+    else if (typeof range === "string") {
         const nums: string[] = range.split(",");
         nums.forEach((n: string) => {
             const m = n.match(/([0-9]+)-([0-9]+)/);
